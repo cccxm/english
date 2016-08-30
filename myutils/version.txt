@@ -9,3 +9,6 @@ v0.22016.8.23
 5,添加Picasso類庫
 6,創建Picasso圓形變換模板
 7,創建用於初始化的MyApplication
+
+v0.3 2016.8.30
+添加下拉控件DropLayout
