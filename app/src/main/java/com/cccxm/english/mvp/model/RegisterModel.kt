@@ -1,0 +1,29 @@
+package com.cccxm.english.mvp.model
+
+import com.cccxm.english.bean.HttpResponse
+import com.cccxm.english.bean.UserBean
+import com.cccxm.english.config.Urls
+import com.cccxm.english.mvp.contract.RegisterContract
+import com.cccxm.english.net.RegisterService
+import com.cxm.lib.retrofit.RetrofitUtils
+import rx.android.schedulers.AndroidSchedulers
+import rx.schedulers.Schedulers
+
+/**
+ * 菩提本无树
+ * 明镜亦非台
+ * 本来无一物
+ * 何处惹尘埃
+ * 陈小默 16/8/29.
+ */
+class RegisterModel : RegisterContract.IRegisterModel {
+    override fun register(username: String, password: String, cb: (HttpResponse<UserBean>) -> Unit) {
+        val service = RetrofitUtils.getService(Urls.HOST, RegisterService::class.java)
+        service.register(username, password)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe { res ->
+                    cb.invoke(res)
+                }
+    }
+}

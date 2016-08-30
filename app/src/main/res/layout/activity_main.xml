@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context="com.cccxm.english.mvp.view.activity.MainActivity">
+
+    <TextView
+        android:id="@+id/word_lib"
+        style="@style/text_button"
+        android:layout_marginTop="100dp"
+        android:text="单词学习" />
+
+    <TextView
+        android:id="@+id/tongue_lib"
+        style="@style/text_button"
+        android:layout_marginTop="250dp"
+        android:text="口语学习" />
+
+    <TextView
+        android:id="@+id/dialog_lib"
+        style="@style/text_button"
+        android:layout_marginTop="400dp"
+        android:text="情景对话" />
+
+    <com.cxm.view.DropLayout
+        android:id="@+id/drop_group"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#c5c500"
+        android:elevation="15dp">
+
+        <include layout="@layout/include_main_drop" />
+    </com.cxm.view.DropLayout>
+
+</RelativeLayout>

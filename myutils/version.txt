@@ -1,0 +1,11 @@
+v 0.1 2016.8.20
+創建工程
+
+v0.22016.8.23
+1,添加Gson類庫
+2,添加rxAndroid類庫
+3,添加retrofit2類庫
+4,添加okHttp3類庫
+5,添加Picasso類庫
+6,創建Picasso圓形變換模板
+7,創建用於初始化的MyApplication

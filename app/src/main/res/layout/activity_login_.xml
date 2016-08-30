@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.design.widget.TextInputEditText
+        android:id="@+id/username"
+        style="@style/edit_info"
+        android:layout_marginTop="70dp"
+        android:hint="username"
+        android:inputType="phone" />
+
+    <android.support.design.widget.TextInputEditText
+        android:id="@+id/password"
+        style="@style/edit_info"
+        android:layout_marginTop="150dp"
+        android:hint="password"
+        android:inputType="textPassword" />
+
+    <Button
+        android:id="@+id/login_bt"
+        style="@style/edit_info"
+        android:layout_marginTop="230dp"
+        android:background="@drawable/main_button"
+        android:text="登录"
+        android:textColor="@android:color/white"
+        android:textSize="18sp" />
+
+    <Button
+        android:id="@+id/register_bt"
+        style="@style/edit_info"
+        android:layout_marginTop="310dp"
+        android:background="@drawable/secend_button"
+        android:text="注册"
+        android:textColor="@android:color/white"
+        android:textSize="18sp" />
+</RelativeLayout>
