@@ -29,6 +29,8 @@ class TongueLibActivity : BaseActivity<TongueLibContract.ITongueLibPresenter>(),
 
     override fun initView() {
         holder.bind(this)
+        val head = layoutInflater.inflate(R.layout.item_tongue_lib, null)
+        holder.lv!!.addHeaderView(head)
         holder.drop!!.drop_top = UnitUtils().dip2px(50F, this)
     }
 
