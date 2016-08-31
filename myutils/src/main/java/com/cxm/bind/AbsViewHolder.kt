@@ -51,6 +51,7 @@ abstract class AbsViewHolder {
                     val viewHolder = holder.newInstance()
                     val view = inflater.inflate(layoutResId, null)
                     view.tag = viewHolder
+                    viewHolder.mConvertView = view
                     viewHolder.bind(view)
                     viewHolder
                 } else convertView.tag!! as H

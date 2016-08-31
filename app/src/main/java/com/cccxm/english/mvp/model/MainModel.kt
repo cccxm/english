@@ -9,6 +9,6 @@ import com.cccxm.english.mvp.contract.MainContract
  * 何处惹尘埃
  * 陈小默 16/8/30.
  */
-class MainModel :MainContract.IMainMedel{
+class MainModel :MainContract.IMainModel {
 
 }

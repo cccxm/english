@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_tongue_lib"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.cccxm.english.mvp.view.activity.TongueLibActivity">
+
+    <com.cxm.view.DropLayout
+        android:id="@+id/dropLayout"
+        android:layout_width="match_parent"
+        android:background="#32b0ff"
+        android:layout_height="50dp">
+
+    </com.cxm.view.DropLayout>
+
+    <ListView
+        android:id="@+id/tongue_lv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/dropLayout" />
+</RelativeLayout>

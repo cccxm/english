@@ -3,6 +3,7 @@ package com.cccxm.english.mvp.view.activity
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
+import android.widget.Toast
 import com.cccxm.english.R
 import com.cccxm.english.config.UserHolder
 import com.cccxm.english.mvp.contract.MainContract
@@ -11,6 +12,7 @@ import com.cccxm.english.mvp.present.MainPresent
 import com.cxm.bind.AbsViewHolder
 import com.cxm.bind.ViewInject
 import com.cxm.mvp.BaseActivity
+import com.cxm.utils.ActivityUtils
 import com.cxm.utils.UnitUtils
 import com.cxm.view.DropEventSource
 import com.cxm.view.DropLayout
@@ -51,15 +53,19 @@ class MainActivity : BaseActivity<MainContract.IMainPresent>(), MainContract.IMa
     }
 
     override fun wordLibActivity() {
+        Toast.makeText(this, "wordLibActivity", Toast.LENGTH_SHORT).show()
     }
 
     override fun tongueLibActivity() {
+        ActivityUtils.startActivity(this, TongueLibActivity::class.java)
     }
 
     override fun dialogLibActivity() {
+        Toast.makeText(this, "dialogLibActivity", Toast.LENGTH_SHORT).show()
     }
 
     override fun settingsActivity() {
+        Toast.makeText(this, "settingsActivity", Toast.LENGTH_SHORT).show()
 
     }
 

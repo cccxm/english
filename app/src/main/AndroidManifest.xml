@@ -25,6 +25,9 @@
             android:name=".mvp.view.activity.MainActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity android:name=".mvp.view.activity.RegisterActivity" />
+        <activity
+            android:name=".mvp.view.activity.TongueLibActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
     </application>
 
 </manifest>

@@ -24,7 +24,7 @@ interface MainContract {
 
     }
 
-    interface IMainMedel {
+    interface IMainModel {
 
     }
 }

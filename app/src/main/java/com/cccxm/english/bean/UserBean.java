@@ -21,8 +21,17 @@ public class UserBean implements Serializable {
 
     private String username;
     private String password;
+    private String sid;
     private String token;
     private int score;
+
+    public String getSid() {
+        return sid;
+    }
+
+    public void setSid(String sid) {
+        this.sid = sid;
+    }
 
     public String getUsername() {
         return username;

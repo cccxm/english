@@ -9,19 +9,19 @@
     <TextView
         android:id="@+id/word_lib"
         style="@style/text_button"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="50dp"
         android:text="单词学习" />
 
     <TextView
         android:id="@+id/tongue_lib"
         style="@style/text_button"
-        android:layout_marginTop="250dp"
+        android:layout_marginTop="200dp"
         android:text="口语学习" />
 
     <TextView
         android:id="@+id/dialog_lib"
         style="@style/text_button"
-        android:layout_marginTop="400dp"
+        android:layout_marginTop="350dp"
         android:text="情景对话" />
 
     <com.cxm.view.DropLayout
