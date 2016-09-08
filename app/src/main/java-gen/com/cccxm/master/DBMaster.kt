@@ -31,7 +31,7 @@ object DBMaster {
 
     fun getMaster(): DaoMaster = master!!
 
-    fun newSession() = getMaster().newSession()
+    fun newSession() = getMaster().newSession()!!
 
     private fun upgrade(db: Database, oldVersion: Int, newVersion: Int) {
 

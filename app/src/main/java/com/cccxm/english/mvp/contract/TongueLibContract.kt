@@ -21,17 +21,21 @@ interface TongueLibContract {
         fun startDetailActivity(bean: TongueLibBean)
         fun message(msg: String)
         fun getListView(): ListView
-        fun showLibInfo(name: String, level: Int, score: Int, my: Int)
+        fun showLibInfo(name: String, level: Int, score: Int, my: Int, position: Int)
+        fun hideLibInfo()
     }
 
     interface ITongueLibPresenter : IPresenter {
         fun loadList()
         fun click(position: Int)
+        fun libDownload(position: Int)
     }
 
     interface ITongueLibModel {
         fun loadList(page: Int, token: String, cb: (HttpListResponse<TongueLib>) -> Unit)
 
         fun loadDB(id: Int, size: Int, cb: (MutableList<TongueLib>) -> Unit)
+
+        fun downloadLib(uri: String, token: String, cb: (String) -> Unit)
     }
 }

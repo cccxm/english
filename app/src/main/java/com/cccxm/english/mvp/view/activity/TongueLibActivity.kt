@@ -49,8 +49,9 @@ class TongueLibActivity : BaseActivity<TongueLibContract.ITongueLibPresenter>(),
         }
     }
 
-    override fun showLibInfo(name: String, level: Int, score: Int, my: Int) {
-        val dialog = object : DialogUtils(null, R.layout.dialog_item_info) {
+    var dialog: DialogUtils? = null
+    override fun showLibInfo(name: String, level: Int, score: Int, my: Int, position: Int) {
+        dialog = object : DialogUtils(null, R.layout.dialog_item_info) {
             override fun prepare(view: View) {
                 val holder = DialogItemHolder()
                 holder.bind(view)
@@ -58,9 +59,17 @@ class TongueLibActivity : BaseActivity<TongueLibContract.ITongueLibPresenter>(),
                 holder.lib_level!!.text = "积分大于 $level 可下载"
                 holder.lib_score!!.text = "学习完成后可以获得 $score 积分"
                 holder.my_score!!.text = "您当前的积分等级为:$my"
+                holder.lib_download!!.setOnClickListener { presenter!!.libDownload(position) }
             }
         }
-        dialog.show(fragmentManager, "tag")
+        dialog!!.show(fragmentManager, "tag")
+    }
+
+    override fun hideLibInfo() {
+        if (dialog != null && dialog!!.isVisible) {
+            dialog!!.dismiss()
+            dialog = null
+        }
     }
 
     override fun startDetailActivity(bean: TongueLibBean) {

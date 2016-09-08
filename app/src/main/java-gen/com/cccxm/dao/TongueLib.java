@@ -11,7 +11,6 @@ public class TongueLib {
 
     @Id
     private Long id;
-    private Integer lib_category;
 
     @NotNull
     private String lib_name;
@@ -29,9 +28,8 @@ public class TongueLib {
     }
 
     @Generated
-    public TongueLib(Long id, Integer lib_category, String lib_name, Integer level, Integer score, String uri, Integer count) {
+    public TongueLib(Long id, String lib_name, Integer level, Integer score, String uri, Integer count) {
         this.id = id;
-        this.lib_category = lib_category;
         this.lib_name = lib_name;
         this.level = level;
         this.score = score;
@@ -45,14 +43,6 @@ public class TongueLib {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Integer getLib_category() {
-        return lib_category;
-    }
-
-    public void setLib_category(Integer lib_category) {
-        this.lib_category = lib_category;
     }
 
     @NotNull
@@ -97,4 +87,15 @@ public class TongueLib {
         this.count = count;
     }
 
+    @Override
+    public String toString() {
+        return "TongueLib{" +
+                "id=" + id +
+                ", lib_name='" + lib_name + '\'' +
+                ", level=" + level +
+                ", score=" + score +
+                ", uri='" + uri + '\'' +
+                ", count=" + count +
+                '}';
+    }
 }

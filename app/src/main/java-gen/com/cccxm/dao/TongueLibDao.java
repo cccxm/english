@@ -23,12 +23,11 @@ public class TongueLibDao extends AbstractDao<TongueLib, Long> {
      */
     public static class Properties {
         public final static Property Id = new Property(0, Long.class, "id", true, "_id");
-        public final static Property Lib_category = new Property(1, Integer.class, "lib_category", false, "LIB_CATEGORY");
-        public final static Property Lib_name = new Property(2, String.class, "lib_name", false, "LIB_NAME");
-        public final static Property Level = new Property(3, Integer.class, "level", false, "LEVEL");
-        public final static Property Score = new Property(4, Integer.class, "score", false, "SCORE");
-        public final static Property Uri = new Property(5, String.class, "uri", false, "URI");
-        public final static Property Count = new Property(6, Integer.class, "count", false, "COUNT");
+        public final static Property Lib_name = new Property(1, String.class, "lib_name", false, "LIB_NAME");
+        public final static Property Level = new Property(2, Integer.class, "level", false, "LEVEL");
+        public final static Property Score = new Property(3, Integer.class, "score", false, "SCORE");
+        public final static Property Uri = new Property(4, String.class, "uri", false, "URI");
+        public final static Property Count = new Property(5, Integer.class, "count", false, "COUNT");
     }
 
 
@@ -45,12 +44,11 @@ public class TongueLibDao extends AbstractDao<TongueLib, Long> {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"TONGUE_LIB\" (" + //
                 "\"_id\" INTEGER PRIMARY KEY ," + // 0: id
-                "\"LIB_CATEGORY\" INTEGER," + // 1: lib_category
-                "\"LIB_NAME\" TEXT NOT NULL ," + // 2: lib_name
-                "\"LEVEL\" INTEGER," + // 3: level
-                "\"SCORE\" INTEGER," + // 4: score
-                "\"URI\" TEXT," + // 5: uri
-                "\"COUNT\" INTEGER);"); // 6: count
+                "\"LIB_NAME\" TEXT NOT NULL ," + // 1: lib_name
+                "\"LEVEL\" INTEGER," + // 2: level
+                "\"SCORE\" INTEGER," + // 3: score
+                "\"URI\" TEXT," + // 4: uri
+                "\"COUNT\" INTEGER);"); // 5: count
     }
 
     /** Drops the underlying database table. */
@@ -67,31 +65,26 @@ public class TongueLibDao extends AbstractDao<TongueLib, Long> {
         if (id != null) {
             stmt.bindLong(1, id);
         }
- 
-        Integer lib_category = entity.getLib_category();
-        if (lib_category != null) {
-            stmt.bindLong(2, lib_category);
-        }
-        stmt.bindString(3, entity.getLib_name());
+        stmt.bindString(2, entity.getLib_name());
  
         Integer level = entity.getLevel();
         if (level != null) {
-            stmt.bindLong(4, level);
+            stmt.bindLong(3, level);
         }
  
         Integer score = entity.getScore();
         if (score != null) {
-            stmt.bindLong(5, score);
+            stmt.bindLong(4, score);
         }
  
         String uri = entity.getUri();
         if (uri != null) {
-            stmt.bindString(6, uri);
+            stmt.bindString(5, uri);
         }
  
         Integer count = entity.getCount();
         if (count != null) {
-            stmt.bindLong(7, count);
+            stmt.bindLong(6, count);
         }
     }
 
@@ -103,31 +96,26 @@ public class TongueLibDao extends AbstractDao<TongueLib, Long> {
         if (id != null) {
             stmt.bindLong(1, id);
         }
- 
-        Integer lib_category = entity.getLib_category();
-        if (lib_category != null) {
-            stmt.bindLong(2, lib_category);
-        }
-        stmt.bindString(3, entity.getLib_name());
+        stmt.bindString(2, entity.getLib_name());
  
         Integer level = entity.getLevel();
         if (level != null) {
-            stmt.bindLong(4, level);
+            stmt.bindLong(3, level);
         }
  
         Integer score = entity.getScore();
         if (score != null) {
-            stmt.bindLong(5, score);
+            stmt.bindLong(4, score);
         }
  
         String uri = entity.getUri();
         if (uri != null) {
-            stmt.bindString(6, uri);
+            stmt.bindString(5, uri);
         }
  
         Integer count = entity.getCount();
         if (count != null) {
-            stmt.bindLong(7, count);
+            stmt.bindLong(6, count);
         }
     }
 
@@ -140,12 +128,11 @@ public class TongueLibDao extends AbstractDao<TongueLib, Long> {
     public TongueLib readEntity(Cursor cursor, int offset) {
         TongueLib entity = new TongueLib( //
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
-            cursor.isNull(offset + 1) ? null : cursor.getInt(offset + 1), // lib_category
-            cursor.getString(offset + 2), // lib_name
-            cursor.isNull(offset + 3) ? null : cursor.getInt(offset + 3), // level
-            cursor.isNull(offset + 4) ? null : cursor.getInt(offset + 4), // score
-            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // uri
-            cursor.isNull(offset + 6) ? null : cursor.getInt(offset + 6) // count
+            cursor.getString(offset + 1), // lib_name
+            cursor.isNull(offset + 2) ? null : cursor.getInt(offset + 2), // level
+            cursor.isNull(offset + 3) ? null : cursor.getInt(offset + 3), // score
+            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // uri
+            cursor.isNull(offset + 5) ? null : cursor.getInt(offset + 5) // count
         );
         return entity;
     }
@@ -153,12 +140,11 @@ public class TongueLibDao extends AbstractDao<TongueLib, Long> {
     @Override
     public void readEntity(Cursor cursor, TongueLib entity, int offset) {
         entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
-        entity.setLib_category(cursor.isNull(offset + 1) ? null : cursor.getInt(offset + 1));
-        entity.setLib_name(cursor.getString(offset + 2));
-        entity.setLevel(cursor.isNull(offset + 3) ? null : cursor.getInt(offset + 3));
-        entity.setScore(cursor.isNull(offset + 4) ? null : cursor.getInt(offset + 4));
-        entity.setUri(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
-        entity.setCount(cursor.isNull(offset + 6) ? null : cursor.getInt(offset + 6));
+        entity.setLib_name(cursor.getString(offset + 1));
+        entity.setLevel(cursor.isNull(offset + 2) ? null : cursor.getInt(offset + 2));
+        entity.setScore(cursor.isNull(offset + 3) ? null : cursor.getInt(offset + 3));
+        entity.setUri(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
+        entity.setCount(cursor.isNull(offset + 5) ? null : cursor.getInt(offset + 5));
      }
     
     @Override
