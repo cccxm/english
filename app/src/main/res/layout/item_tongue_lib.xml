@@ -7,7 +7,6 @@
 
     <TextView
         android:id="@+id/item_name_tv"
-        style="@style/text_button"
-        android:text="点击继续背诵" />
+        style="@style/text_button" />
 
 </LinearLayout>

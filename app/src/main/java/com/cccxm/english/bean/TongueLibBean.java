@@ -9,17 +9,18 @@ package com.cccxm.english.bean;
  */
 
 public class TongueLibBean {
-
     /**
      * id : 1
      * lib_name : 简单实用口语(1)
+     * level : 0
      * score : 1
-     * uri : https://raw.githubusercontent.com/cccxm/GUIFramework/master/out/00000001.json
+     * uri : 00000001.json
      * count : 20
      */
 
     private int id;
     private String lib_name;
+    private int level;
     private int score;
     private String uri;
     private int count;
@@ -38,6 +39,14 @@ public class TongueLibBean {
 
     public void setLib_name(String lib_name) {
         this.lib_name = lib_name;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
     }
 
     public int getScore() {

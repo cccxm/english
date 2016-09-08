@@ -20,8 +20,6 @@ interface WelcomeContract {
          * 用戶選擇跳過廣告
          */
         fun skip()
-
-        fun callback(response: HttpResponse<WelcomeBean>)
     }
 
     interface IWelcomeView : IView {
@@ -54,7 +52,7 @@ interface WelcomeContract {
     }
 
     interface IWelcomeModel {
-        fun loadData(present: IWelcomePresent)
+        fun loadData(present: IWelcomePresent, cb: (HttpResponse<WelcomeBean>) -> Unit)
 
         fun login(username: String, password: String, cb: (HttpResponse<UserBean>) -> Unit)
     }

@@ -27,11 +27,14 @@ class WelcomePresent(val model: WelcomeContract.IWelcomeModel,
     }
 
     override fun start() {
-        model.loadData(this)
+        login()
+//        model.loadData(this, { res ->
+//            callback(res)
+//        })
     }
 
 
-    override fun callback(response: HttpResponse<WelcomeBean>) {
+    fun callback(response: HttpResponse<WelcomeBean>) {
         if (response.isSuccess) {
             view.getImage().setOnClickListener { v ->
                 view.openBrowser(response.data.url)
@@ -54,13 +57,13 @@ class WelcomePresent(val model: WelcomeContract.IWelcomeModel,
         } else {
             if (StringUtils.isPhone(user.username) && StringUtils.password(user.password)) {
                 model.login(user.username, user.password, { res ->
-                    if(res.isSuccess){
+                    if (res.isSuccess) {
                         val bean = res.data
                         bean.password = user.password
-                        UserHolder.saveUser(view.context(),bean)
+                        UserHolder.saveUser(view.context(), bean)
                         view.startMainActivity()
                         view.finish()
-                    }else{
+                    } else {
                         view.startLoginActivity()
                         view.finish()
                     }

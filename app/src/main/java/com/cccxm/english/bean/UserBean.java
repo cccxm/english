@@ -12,10 +12,10 @@ import java.io.Serializable;
 
 public class UserBean implements Serializable {
     public static final long serialVersionUID = 123456789L;
-
     /**
      * username : 13526030556
-     * token : 9F9B969473082125238303F4EFA23CAA
+     * sid : D072868292466B2AF69FA8CB043084AA
+     * token : bac322ac673f693eaeba175f3caba844
      * score : 0
      */
 
@@ -25,12 +25,12 @@ public class UserBean implements Serializable {
     private String token;
     private int score;
 
-    public String getSid() {
-        return sid;
+    public String getPassword() {
+        return password;
     }
 
-    public void setSid(String sid) {
-        this.sid = sid;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getUsername() {
@@ -39,6 +39,14 @@ public class UserBean implements Serializable {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getSid() {
+        return sid;
+    }
+
+    public void setSid(String sid) {
+        this.sid = sid;
     }
 
     public String getToken() {
@@ -57,11 +65,4 @@ public class UserBean implements Serializable {
         this.score = score;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
 }

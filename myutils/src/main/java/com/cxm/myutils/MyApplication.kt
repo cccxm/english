@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit
  * 默認Application類
  * 陈小默 16/8/23.
  */
-class MyApplication : Application() {
+open class MyApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         val cookieJar = CookieJarImpl(PersistentCookieStore(applicationContext))

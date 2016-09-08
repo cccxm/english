@@ -1,7 +1,7 @@
 package com.cccxm.english.net
 
+import com.cccxm.dao.TongueLib
 import com.cccxm.english.bean.HttpListResponse
-import com.cccxm.english.bean.TongueLibBean
 import com.cccxm.english.config.Urls
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -16,5 +16,5 @@ import rx.Observable
  */
 interface TongueLibService {
     @GET(Urls.TONGUE_LIB_LIST)
-    fun getLibList(@Query("page") page: Int, @Query("token") token: String): Observable<HttpListResponse<TongueLibBean>>
+    fun getLibList(@Query("page") page: Int, @Query("token") token: String): Observable<HttpListResponse<TongueLib>>
 }

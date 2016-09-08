@@ -11,7 +11,7 @@ import java.util.*
 abstract class CommonBaseAdapter<T, H : AbsViewHolder>(val holder: Class<H>,
                                                        val resId: Int,
                                                        val context: Context) : BaseAdapter() {
-    var list: ArrayList<T> = ArrayList()
+    var list: MutableList<T> = ArrayList()
         set(value) {
             field = value
             notifyDataSetChanged()
@@ -19,6 +19,11 @@ abstract class CommonBaseAdapter<T, H : AbsViewHolder>(val holder: Class<H>,
 
     fun addData(data: T) {
         list.add(data)
+        notifyDataSetChanged()
+    }
+
+    fun addAllData(list: MutableList<T>) {
+        list.addAll(list)
         notifyDataSetChanged()
     }
 
