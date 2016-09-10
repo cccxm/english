@@ -1,5 +1,6 @@
 package com.cccxm.english.mvp.view.activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.ListView
@@ -14,6 +15,7 @@ import com.cccxm.english.mvp.view.holder.DialogItemHolder
 import com.cxm.bind.AbsViewHolder
 import com.cxm.bind.ViewInject
 import com.cxm.mvp.BaseActivity
+import com.cxm.utils.ActivityUtils
 import com.cxm.utils.DialogUtils
 import com.cxm.utils.UnitUtils
 import com.cxm.view.DropEventSource
@@ -72,7 +74,15 @@ class TongueLibActivity : BaseActivity<TongueLibContract.ITongueLibPresenter>(),
         }
     }
 
-    override fun startDetailActivity(bean: TongueLibBean) {
+    override fun startReciteActivity() {
+        val intent = Intent(this, ReciteActivity::class.java)
+        startActivity(intent)
+    }
+
+    override fun startDetailActivity(id: Long) {
+        val intent = Intent(this, DetailActivity::class.java)
+        intent.putExtra("id", id)
+        startActivity(intent)
     }
 
     override fun message(msg: String) {

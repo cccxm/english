@@ -18,7 +18,8 @@ interface TongueLibContract {
     interface ITongueLibView : IView {
         fun initView()
         fun register()
-        fun startDetailActivity(bean: TongueLibBean)
+        fun startReciteActivity()
+        fun startDetailActivity(id: Long)
         fun message(msg: String)
         fun getListView(): ListView
         fun showLibInfo(name: String, level: Int, score: Int, my: Int, position: Int)

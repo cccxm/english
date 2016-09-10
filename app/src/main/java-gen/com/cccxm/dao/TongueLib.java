@@ -18,6 +18,7 @@ public class TongueLib {
     private Integer score;
     private String uri;
     private Integer count;
+    private Boolean submit;
 
     @Generated
     public TongueLib() {
@@ -28,13 +29,14 @@ public class TongueLib {
     }
 
     @Generated
-    public TongueLib(Long id, String lib_name, Integer level, Integer score, String uri, Integer count) {
+    public TongueLib(Long id, String lib_name, Integer level, Integer score, String uri, Integer count, Boolean submit) {
         this.id = id;
         this.lib_name = lib_name;
         this.level = level;
         this.score = score;
         this.uri = uri;
         this.count = count;
+        this.submit = submit;
     }
 
     public Long getId() {
@@ -87,15 +89,12 @@ public class TongueLib {
         this.count = count;
     }
 
-    @Override
-    public String toString() {
-        return "TongueLib{" +
-                "id=" + id +
-                ", lib_name='" + lib_name + '\'' +
-                ", level=" + level +
-                ", score=" + score +
-                ", uri='" + uri + '\'' +
-                ", count=" + count +
-                '}';
+    public Boolean getSubmit() {
+        return submit;
     }
+
+    public void setSubmit(Boolean submit) {
+        this.submit = submit;
+    }
+
 }

@@ -15,5 +15,6 @@ class Urls {
         const val REGISTER = "register"
         const val TONGUE_LIB_LIST = "user/lib/tongue/list"
         const val DOWNLOAD_LIB = "user/lib/download"
+        const val SUBMIT = "user/score/submit"
     }
 }

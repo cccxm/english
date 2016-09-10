@@ -28,6 +28,7 @@ public class TongueLibDao extends AbstractDao<TongueLib, Long> {
         public final static Property Score = new Property(3, Integer.class, "score", false, "SCORE");
         public final static Property Uri = new Property(4, String.class, "uri", false, "URI");
         public final static Property Count = new Property(5, Integer.class, "count", false, "COUNT");
+        public final static Property Submit = new Property(6, Boolean.class, "submit", false, "SUBMIT");
     }
 
 
@@ -48,7 +49,8 @@ public class TongueLibDao extends AbstractDao<TongueLib, Long> {
                 "\"LEVEL\" INTEGER," + // 2: level
                 "\"SCORE\" INTEGER," + // 3: score
                 "\"URI\" TEXT," + // 4: uri
-                "\"COUNT\" INTEGER);"); // 5: count
+                "\"COUNT\" INTEGER," + // 5: count
+                "\"SUBMIT\" INTEGER);"); // 6: submit
     }
 
     /** Drops the underlying database table. */
@@ -86,6 +88,11 @@ public class TongueLibDao extends AbstractDao<TongueLib, Long> {
         if (count != null) {
             stmt.bindLong(6, count);
         }
+ 
+        Boolean submit = entity.getSubmit();
+        if (submit != null) {
+            stmt.bindLong(7, submit ? 1L: 0L);
+        }
     }
 
     @Override
@@ -117,6 +124,11 @@ public class TongueLibDao extends AbstractDao<TongueLib, Long> {
         if (count != null) {
             stmt.bindLong(6, count);
         }
+ 
+        Boolean submit = entity.getSubmit();
+        if (submit != null) {
+            stmt.bindLong(7, submit ? 1L: 0L);
+        }
     }
 
     @Override
@@ -132,7 +144,8 @@ public class TongueLibDao extends AbstractDao<TongueLib, Long> {
             cursor.isNull(offset + 2) ? null : cursor.getInt(offset + 2), // level
             cursor.isNull(offset + 3) ? null : cursor.getInt(offset + 3), // score
             cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // uri
-            cursor.isNull(offset + 5) ? null : cursor.getInt(offset + 5) // count
+            cursor.isNull(offset + 5) ? null : cursor.getInt(offset + 5), // count
+            cursor.isNull(offset + 6) ? null : cursor.getShort(offset + 6) != 0 // submit
         );
         return entity;
     }
@@ -145,6 +158,7 @@ public class TongueLibDao extends AbstractDao<TongueLib, Long> {
         entity.setScore(cursor.isNull(offset + 3) ? null : cursor.getInt(offset + 3));
         entity.setUri(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
         entity.setCount(cursor.isNull(offset + 5) ? null : cursor.getInt(offset + 5));
+        entity.setSubmit(cursor.isNull(offset + 6) ? null : cursor.getShort(offset + 6) != 0);
      }
     
     @Override

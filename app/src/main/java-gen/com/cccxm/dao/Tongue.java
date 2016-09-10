@@ -18,8 +18,8 @@ public class Tongue {
 
     @NotNull
     private String ch;
-    private java.util.Date next;
-    private Integer progress;
+    private long next;
+    private int progress;
 
     @Generated
     public Tongue() {
@@ -30,7 +30,7 @@ public class Tongue {
     }
 
     @Generated
-    public Tongue(Long id, int lib_id, String en, String ch, java.util.Date next, Integer progress) {
+    public Tongue(Long id, int lib_id, String en, String ch, long next, int progress) {
         this.id = id;
         this.lib_id = lib_id;
         this.en = en;
@@ -75,19 +75,19 @@ public class Tongue {
         this.ch = ch;
     }
 
-    public java.util.Date getNext() {
+    public long getNext() {
         return next;
     }
 
-    public void setNext(java.util.Date next) {
+    public void setNext(long next) {
         this.next = next;
     }
 
-    public Integer getProgress() {
+    public int getProgress() {
         return progress;
     }
 
-    public void setProgress(Integer progress) {
+    public void setProgress(int progress) {
         this.progress = progress;
     }
 

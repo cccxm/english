@@ -1,7 +1,5 @@
 package com.cccxm.english.mvp.present
 
-import android.util.Log
-import android.util.SparseBooleanArray
 import com.cccxm.dao.Tongue
 import com.cccxm.dao.TongueLib
 import com.cccxm.english.R
@@ -45,11 +43,11 @@ class TongueLibPresenter(val model: TongueLibContract.ITongueLibModel,
 
     override fun click(position: Int) {
         if (position == 0) {
-            Log.e("---message--", "继续学习")//TODO
+            view.startReciteActivity()
         } else {
             val item = adapter.getItem(position - 1)
             if (isDownload.contains(item.id.toInt())) {
-                Log.e("--download--", "true")//TODO
+                view.startDetailActivity(item.id)
             } else {
                 view.showLibInfo(item.lib_name, item.level, item.score, UserHolder.getUser()!!.score, position - 1)
             }
@@ -63,13 +61,15 @@ class TongueLibPresenter(val model: TongueLibContract.ITongueLibModel,
         model.downloadLib(item.uri, UserHolder.getUser(view.context())!!.token, { res ->
             val bean = Gson().fromJson(res, TongueBean::class.java)
             val session = DBMaster.newSession()
+            item.submit=false
             session.tongueLibDao.insert(item)
             bean.list.forEach { t ->
-                val tongue = Tongue(null, item.id.toInt(), t.en, t.ch, null, null)
+                val tongue = Tongue(null, item.id.toInt(), t.en, t.ch, 0, -1)
                 session.tongueDao.insert(tongue)
             }
             isDownload.add(item.id.toInt())
             view.hideLibInfo()
+            adapter.list = ArrayList<TongueLib>()
             page = 0
             loadList()
         })

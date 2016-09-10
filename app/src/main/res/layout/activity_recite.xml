@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_recite"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#326f6f7f"
+    tools:context="com.cccxm.english.mvp.view.activity.ReciteActivity">
+
+    <TextView
+        android:id="@+id/count_tv"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#3879d8"
+        android:gravity="center"
+        android:text="2/3"
+        android:textSize="16sp" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_below="@+id/count_tv"
+        android:layout_margin="15dp"
+        android:background="#fff"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/en_tv"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Hello World"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/ch_tv"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="你好世界" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/bad"
+        android:layout_width="130dp"
+        android:layout_height="50dp"
+        android:layout_alignStart="@+id/linearLayout"
+        android:layout_below="@+id/linearLayout"
+        android:layout_marginTop="35dp"
+        android:background="@drawable/gray_text_button"
+        android:gravity="center"
+        android:text="不认识" />
+
+    <TextView
+        android:id="@+id/better"
+        android:layout_width="130dp"
+        android:layout_height="50dp"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/linearLayout"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="35dp"
+        android:background="@drawable/text_button"
+        android:gravity="center"
+        android:text="认识" />
+
+</RelativeLayout>

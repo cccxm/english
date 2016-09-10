@@ -26,8 +26,8 @@ public class TongueDao extends AbstractDao<Tongue, Long> {
         public final static Property Lib_id = new Property(1, int.class, "lib_id", false, "LIB_ID");
         public final static Property En = new Property(2, String.class, "en", false, "EN");
         public final static Property Ch = new Property(3, String.class, "ch", false, "CH");
-        public final static Property Next = new Property(4, java.util.Date.class, "next", false, "NEXT");
-        public final static Property Progress = new Property(5, Integer.class, "progress", false, "PROGRESS");
+        public final static Property Next = new Property(4, long.class, "next", false, "NEXT");
+        public final static Property Progress = new Property(5, int.class, "progress", false, "PROGRESS");
     }
 
 
@@ -47,8 +47,8 @@ public class TongueDao extends AbstractDao<Tongue, Long> {
                 "\"LIB_ID\" INTEGER NOT NULL ," + // 1: lib_id
                 "\"EN\" TEXT NOT NULL ," + // 2: en
                 "\"CH\" TEXT NOT NULL ," + // 3: ch
-                "\"NEXT\" INTEGER," + // 4: next
-                "\"PROGRESS\" INTEGER);"); // 5: progress
+                "\"NEXT\" INTEGER NOT NULL ," + // 4: next
+                "\"PROGRESS\" INTEGER NOT NULL );"); // 5: progress
     }
 
     /** Drops the underlying database table. */
@@ -68,16 +68,8 @@ public class TongueDao extends AbstractDao<Tongue, Long> {
         stmt.bindLong(2, entity.getLib_id());
         stmt.bindString(3, entity.getEn());
         stmt.bindString(4, entity.getCh());
- 
-        java.util.Date next = entity.getNext();
-        if (next != null) {
-            stmt.bindLong(5, next.getTime());
-        }
- 
-        Integer progress = entity.getProgress();
-        if (progress != null) {
-            stmt.bindLong(6, progress);
-        }
+        stmt.bindLong(5, entity.getNext());
+        stmt.bindLong(6, entity.getProgress());
     }
 
     @Override
@@ -91,16 +83,8 @@ public class TongueDao extends AbstractDao<Tongue, Long> {
         stmt.bindLong(2, entity.getLib_id());
         stmt.bindString(3, entity.getEn());
         stmt.bindString(4, entity.getCh());
- 
-        java.util.Date next = entity.getNext();
-        if (next != null) {
-            stmt.bindLong(5, next.getTime());
-        }
- 
-        Integer progress = entity.getProgress();
-        if (progress != null) {
-            stmt.bindLong(6, progress);
-        }
+        stmt.bindLong(5, entity.getNext());
+        stmt.bindLong(6, entity.getProgress());
     }
 
     @Override
@@ -115,8 +99,8 @@ public class TongueDao extends AbstractDao<Tongue, Long> {
             cursor.getInt(offset + 1), // lib_id
             cursor.getString(offset + 2), // en
             cursor.getString(offset + 3), // ch
-            cursor.isNull(offset + 4) ? null : new java.util.Date(cursor.getLong(offset + 4)), // next
-            cursor.isNull(offset + 5) ? null : cursor.getInt(offset + 5) // progress
+            cursor.getLong(offset + 4), // next
+            cursor.getInt(offset + 5) // progress
         );
         return entity;
     }
@@ -127,8 +111,8 @@ public class TongueDao extends AbstractDao<Tongue, Long> {
         entity.setLib_id(cursor.getInt(offset + 1));
         entity.setEn(cursor.getString(offset + 2));
         entity.setCh(cursor.getString(offset + 3));
-        entity.setNext(cursor.isNull(offset + 4) ? null : new java.util.Date(cursor.getLong(offset + 4)));
-        entity.setProgress(cursor.isNull(offset + 5) ? null : cursor.getInt(offset + 5));
+        entity.setNext(cursor.getLong(offset + 4));
+        entity.setProgress(cursor.getInt(offset + 5));
      }
     
     @Override
