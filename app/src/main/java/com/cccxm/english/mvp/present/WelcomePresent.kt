@@ -27,10 +27,9 @@ class WelcomePresent(val model: WelcomeContract.IWelcomeModel,
     }
 
     override fun start() {
-        login()
-//        model.loadData(this, { res ->
-//            callback(res)
-//        })
+        model.loadData(this, { res ->
+            callback(res)
+        })
     }
 
 
