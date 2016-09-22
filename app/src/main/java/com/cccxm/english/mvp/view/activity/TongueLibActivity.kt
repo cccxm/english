@@ -38,7 +38,7 @@ class TongueLibActivity : BaseActivity<TongueLibContract.ITongueLibPresenter>(),
         val head = layoutInflater.inflate(R.layout.item_tongue_lib, null)
         (head.findViewById(R.id.item_name_tv) as TextView).text = "点击继续背诵"
         holder.lv!!.addHeaderView(head)
-        holder.drop!!.drop_top = UnitUtils().dip2px(50F, this)
+        holder.drop!!.drop_top = UnitUtils.dip2px(50F, this)
     }
 
     override fun register() {

@@ -1,1 +1,1 @@
-include ':app', ':myutils', ':dao_lib'
+include ':app', ':dao_lib', ':myutils'

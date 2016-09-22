@@ -34,7 +34,7 @@ class MainActivity : BaseActivity<MainContract.IMainPresent>(), MainContract.IMa
 
     override fun register() {
         dropSource.register(holder.dropLayout!!)
-        holder.dropLayout.drop_top = UnitUtils().dip2px(50F, this)
+        holder.dropLayout.drop_top = UnitUtils.dip2px(50F, this)
         holder.dropLayout.setOnTouchListener { view, motionEvent ->
             dropSource.event(motionEvent)
         }

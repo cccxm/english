@@ -1,6 +1,7 @@
 package com.cxm.mvp
 
 import android.content.pm.ActivityInfo
+import android.content.res.Resources
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.View
@@ -14,6 +15,8 @@ import com.cxm.utils.ActivityUtils
  */
 abstract class BaseActivity<P : IPresenter> : AppCompatActivity() {
     var allowFullScreen = false
+    var allowActionBar = false
+    var orientation = Orientation.PORTRAIT
     var presenter: P? = null
         set(value) {
             value?.start()
@@ -22,10 +25,11 @@ abstract class BaseActivity<P : IPresenter> : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT //Vertical Screen
-        if (allowFullScreen) {
+        requestedOrientation = orientation.value
+        if (allowFullScreen)
             requestWindowFeature(Window.FEATURE_NO_TITLE)
-        }
+        if (!allowActionBar)
+            supportActionBar?.hide()
         ActivityUtils.registerActivity(this)
     }
 
@@ -35,9 +39,15 @@ abstract class BaseActivity<P : IPresenter> : AppCompatActivity() {
         super.finish()
     }
 
-    fun getRootView(): View = (findViewById(android.R.id.content) as ViewGroup).getChildAt(0)
+    val root: View get() = (findViewById(android.R.id.content) as ViewGroup).getChildAt(0)
 
-    fun getHeightPixels() = resources.displayMetrics.heightPixels
+    val height: Int get() = resources.displayMetrics.heightPixels
 
-    fun getWidthPixels() = resources.displayMetrics.widthPixels
+    val width: Int get() = resources.displayMetrics.widthPixels
+
+    enum class Orientation(val value: Int) {
+        PORTRAIT(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT),
+        LANDSCAPE(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE),
+        AUTO(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
+    }
 }
