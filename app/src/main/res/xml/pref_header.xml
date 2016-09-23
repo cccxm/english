@@ -37,6 +37,7 @@
         android:key="@string/pref_key_notify_settings"
         android:title="@string/pref_title_notify_settings">
         <SwitchPreference
+            android:defaultValue="true"
             android:key="@string/pref_key_notify_switch"
             android:title="@string/pref_title_notify_switch" />
         <RingtonePreference
