@@ -9,7 +9,7 @@ import java.io.Serializable
  * Bean類的相關操作
  * 陈小默 16/8/19.
  */
-class BeanUtils {
+object BeanUtils {
 
     /**
      * 序列化到本地
@@ -32,6 +32,17 @@ class BeanUtils {
         s as S
     } catch (e: Exception) {
         null
+    }
+
+    fun <T : Any> delete(context: Context, clazz: Class<T>) {
+        delete(context, clazz.name)
+    }
+
+    /**
+     * 从本地删除序列化文件
+     */
+    fun delete(context: Context, fileName: String) {
+        context.deleteFile(fileName)
     }
 
 }

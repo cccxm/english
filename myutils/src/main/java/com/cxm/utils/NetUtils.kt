@@ -20,8 +20,7 @@ class NetUtils(val context: Context) {
      */
     val WIFI_AVAILABLE: Boolean
         get() {
-            val connManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-            val info = connManager.activeNetworkInfo
+            val info = CONNECTIVITY_MANAGER.activeNetworkInfo
             return (info != null && info.isConnected && info.type == ConnectivityManager.TYPE_WIFI)
         }
     /**
@@ -29,8 +28,8 @@ class NetUtils(val context: Context) {
      */
     val NETWORK_ENABLE: Boolean
         get() {
-            val connManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-            val info = connManager.activeNetworkInfo
+            val info = CONNECTIVITY_MANAGER.activeNetworkInfo
+            info ?: return false
             return info.state == NetworkInfo.State.CONNECTED
         }
 
@@ -155,7 +154,7 @@ class NetUtils(val context: Context) {
     /**
      * 当前网络的连接类型
      */
-    val NET_WORK_CLASS: Int?
+    val NETWORK_CLASS: Int?
         get() {
             val netWorkInfo = CONNECTIVITY_MANAGER.activeNetworkInfo
             if (netWorkInfo != null && netWorkInfo.isAvailable && netWorkInfo.isConnected) {
@@ -168,10 +167,11 @@ class NetUtils(val context: Context) {
     /**
      * 当前网络的连接类型
      */
-    val NET_WORK_TYPE: NetworkType
+    val NETWORK_TYPE: NetworkType
         get() {
+            if (!NETWORK_ENABLE) return NetworkType.DISCONNECTION
             if (WIFI_AVAILABLE) return NetworkType.WIFI
-            return when (NET_WORK_CLASS) {
+            return when (NETWORK_CLASS) {
                 TelephonyManager.NETWORK_TYPE_GPRS,
                 TelephonyManager.NETWORK_TYPE_EDGE,
                 TelephonyManager.NETWORK_TYPE_CDMA,
@@ -207,7 +207,7 @@ class NetUtils(val context: Context) {
      */
     val WIFI_RSSI: Int
         get() {
-            if (NET_WORK_TYPE == NetworkType.WIFI) {
+            if (NETWORK_TYPE == NetworkType.WIFI) {
                 val wifiInfo = WIFI_MANAGER.connectionInfo
                 return if (wifiInfo == null) 0 else wifiInfo.rssi
             }
@@ -219,7 +219,7 @@ class NetUtils(val context: Context) {
      */
     val WIFI_SSID: String?
         get() {
-            if (NET_WORK_TYPE == NetworkType.WIFI) {
+            if (NETWORK_TYPE == NetworkType.WIFI) {
                 val wifiInfo = WIFI_MANAGER.connectionInfo
                 return wifiInfo?.ssid
             }
@@ -237,21 +237,21 @@ class NetUtils(val context: Context) {
     /**
      * 手机串号
      */
-    val IMEI: String? = TELEPHONY_MANAGER.deviceId
+    val IMEI: String? get() = TELEPHONY_MANAGER.deviceId
 
     /**
      * 国际移动用户标识码
      */
-    val IMSI: String? = TELEPHONY_MANAGER.subscriberId
+    val IMSI: String? get() = TELEPHONY_MANAGER.subscriberId
 
 }
 
-enum class NetworkType {
-    UNKNOWN,
-    DISCONNECTION,
-    WIFI,
-    DATA2G,
-    DATA3G,
-    DATA4G,
-    DATA5G
+enum class NetworkType(val value: Int) {
+    UNKNOWN(-1),
+    DISCONNECTION(0),
+    DATA2G(1),
+    DATA3G(2),
+    DATA4G(3),
+    WIFI(4),
+    DATA5G(5)
 }

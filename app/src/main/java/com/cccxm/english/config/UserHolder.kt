@@ -15,7 +15,7 @@ object UserHolder {
     private var user: UserBean? = null
     fun getUser(context: Context): UserBean? {
         if (user == null)
-            user = BeanUtils().deSerialized(context, UserBean::class.java)
+            user = BeanUtils.deSerialized(context, UserBean::class.java)
         return user
     }
 
@@ -25,6 +25,11 @@ object UserHolder {
 
     fun saveUser(context: Context, user: UserBean) {
         this.user = user
-        BeanUtils().serialized(context, user)
+        BeanUtils.serialized(context, user)
+    }
+
+    fun deleteUser(context: Context) {
+        user = null
+        BeanUtils.delete(context, UserBean::class.java)
     }
 }

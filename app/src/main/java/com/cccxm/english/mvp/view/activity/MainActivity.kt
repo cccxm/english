@@ -1,10 +1,13 @@
 package com.cccxm.english.mvp.view.activity
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import com.cccxm.english.R
+import com.cccxm.english.config.NetState
 import com.cccxm.english.config.UserHolder
 import com.cccxm.english.mvp.contract.MainContract
 import com.cccxm.english.mvp.model.MainModel
@@ -16,6 +19,12 @@ import com.cxm.utils.ActivityUtils
 import com.cxm.utils.UnitUtils
 import com.cxm.view.DropEventSource
 import com.cxm.view.DropLayout
+
+fun <A : Activity> Activity.start(clazz: Class<A>) {
+    val intent = Intent()
+    intent.setClass(this, clazz)
+    this.startActivity(intent)
+}
 
 class MainActivity : BaseActivity<MainContract.IMainPresent>(), MainContract.IMainView {
     val holder = MainViewHolder()
@@ -29,7 +38,17 @@ class MainActivity : BaseActivity<MainContract.IMainPresent>(), MainContract.IMa
 
     override fun initView() {
         holder.bind(this)
-        holder.score!!.text = "您好!陈小默\r\n您目前的积分是:${user!!.score}"
+        if (user != null)
+            holder.score!!.text = "您好!${user.username}\r\n您目前的积分是:${user.score}"
+        else {
+            if (NetState.state.value > 0) {
+                holder.score!!.text = "请登录"
+                holder.score.setOnClickListener {
+                    ActivityUtils.startActivity(this, LoginActivity::class.java)
+                    finish()
+                }
+            } else holder.score!!.text = "请检查网络"
+        }
     }
 
     override fun register() {
@@ -57,7 +76,7 @@ class MainActivity : BaseActivity<MainContract.IMainPresent>(), MainContract.IMa
     }
 
     override fun tongueLibActivity() {
-        ActivityUtils.startActivity(this, TongueLibActivity::class.java)
+        start(TongueLibActivity::class.java)
     }
 
     override fun dialogLibActivity() {
@@ -65,8 +84,7 @@ class MainActivity : BaseActivity<MainContract.IMainPresent>(), MainContract.IMa
     }
 
     override fun settingsActivity() {
-        Toast.makeText(this, "settingsActivity", Toast.LENGTH_SHORT).show()
-
+        start(SettingsActivity::class.java)
     }
 
     override fun context() = this

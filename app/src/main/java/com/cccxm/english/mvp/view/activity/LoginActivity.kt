@@ -31,6 +31,14 @@ class LoginActivity : BaseActivity<LoginContract.ILoginPresent>(), LoginContract
         }
     }
 
+    override fun setUsername(username: String) {
+        holder.username_et!!.setText(username)
+    }
+
+    override fun setPassword(password: String) {
+        holder.password_et!!.setText(password)
+    }
+
     override fun getUsername() = holder.username_et!!.text.toString()
 
     override fun getPassword() = holder.password_et!!.text.toString()

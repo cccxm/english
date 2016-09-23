@@ -41,5 +41,10 @@ class LoginPresenter(val model: LoginContract.ILoginModel,
     }
 
     override fun start() {
+        val user = UserHolder.getUser(view.context())
+        if (user != null) {
+            view.setUsername(user.username)
+            view.setPassword(user.password)
+        }
     }
 }

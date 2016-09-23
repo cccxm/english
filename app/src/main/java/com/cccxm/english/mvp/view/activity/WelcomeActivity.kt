@@ -5,38 +5,36 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.widget.ImageView
-import android.widget.TextView
 import com.cccxm.english.R
 import com.cccxm.english.mvp.contract.WelcomeContract
 import com.cccxm.english.mvp.model.WelcomeModel
 import com.cccxm.english.mvp.present.WelcomePresent
-import com.cxm.bind.AbsViewHolder
-import com.cxm.bind.ViewInject
 import com.cxm.mvp.BaseActivity
 import com.cxm.utils.ActivityUtils
+import kotlinx.android.synthetic.main.activity_launch.*
 
 class WelcomeActivity : BaseActivity<WelcomeContract.IWelcomePresent>(), WelcomeContract.IWelcomeView {
-    private val holder = WelcomeHolder()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_launch)
-        holder.bind(this)
         presenter = WelcomePresent(WelcomeModel(), this)
     }
 
     override fun startMainActivity() {
         ActivityUtils.startActivity(this, MainActivity::class.java)
+        finish()
     }
 
     override fun startLoginActivity() {
         ActivityUtils.startActivity(this, LoginActivity::class.java)
+        finish()
     }
 
-    override fun getImage(): ImageView = holder.adImage_iv!!
+    override fun getImage(): ImageView = welcomeAdIV
 
     override fun timer(time: Int): Unit {
-        holder.adTimer_tv!!.text = "$time 秒后進入"
+        welcomeTimeTv.text = "$time 秒后進入"
     }
 
     override fun context(): Context = this
@@ -49,11 +47,4 @@ class WelcomeActivity : BaseActivity<WelcomeContract.IWelcomePresent>(), Welcome
         intent.setClassName("com.android.browser", "com.android.browser.BrowserActivity")
         startActivity(intent)
     }
-}
-
-class WelcomeHolder : AbsViewHolder() {
-    @ViewInject(R.id.welcome_advertisement)
-    var adImage_iv: ImageView? = null
-    @ViewInject(R.id.welcome_timer)
-    var adTimer_tv: TextView? = null
 }

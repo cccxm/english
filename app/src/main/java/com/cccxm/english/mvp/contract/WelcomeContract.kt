@@ -47,8 +47,6 @@ interface WelcomeContract {
          * 打開瀏覽器
          */
         fun openBrowser(url: String)
-
-        fun finish()
     }
 
     interface IWelcomeModel {

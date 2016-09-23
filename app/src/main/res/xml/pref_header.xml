@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+        android:key="@string/pref_key_user_settings"
+        android:title="@string/pref_title_user_settings">
+        <Preference android:key="@string/pref_key_user_info" />
+        <EditTextPreference
+            android:defaultValue="0"
+            android:inputType="number"
+            android:key="@string/pref_key_user_vip"
+            android:summary="@string/pref_summary_user_vip"
+            android:title="@string/pref_title_user_vip" />
+        <Preference
+            android:key="@string/pref_key_user_logout"
+            android:summary="@string/pref_summary_user_logout"
+            android:title="@string/pref_title_user_logout" />
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:key="@string/pref_key_net_settings"
+        android:title="@string/pref_title_net_settings">
+        <SwitchPreference
+            android:key="@string/pref_key_net_offline"
+            android:summary="@string/pref_summary_net_offline"
+            android:title="@string/pref_title_net_offline" />
+        <PreferenceScreen
+            android:key="@string/pref_key_net_flow"
+            android:title="@string/pref_title_net_flow">
+            <Preference android:key="@string/pref_key_net_flow_info" />
+            <MultiSelectListPreference
+                android:entries="@array/pref_entries_net_flow"
+                android:entryValues="@array/pref_entryValues_net_flow"
+                android:key="@string/pref_key_net_flow_change"
+                android:title="@string/pref_title_net_flow_change" />
+        </PreferenceScreen>
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:key="@string/pref_key_notify_settings"
+        android:title="@string/pref_title_notify_settings">
+        <SwitchPreference
+            android:key="@string/pref_key_notify_switch"
+            android:title="@string/pref_title_notify_switch" />
+        <RingtonePreference
+            android:key="@string/pref_key_notify_ring"
+            android:title="@string/pref_title_notify_ring" />
+    </PreferenceCategory>
+
+</PreferenceScreen>

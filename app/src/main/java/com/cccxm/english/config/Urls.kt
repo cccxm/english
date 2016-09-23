@@ -9,7 +9,6 @@ package com.cccxm.english.config
  */
 class Urls {
     companion object {
-        var networkState = NetState.DISCONNECTION
         const val HOST = "http://192.168.1.112/smart/"
         const val WELCOME_ADVERTISEMENT = "welcomeAd"
         const val LOGIN = "login"
@@ -17,13 +16,5 @@ class Urls {
         const val TONGUE_LIB_LIST = "user/lib/tongue/list"
         const val DOWNLOAD_LIB = "user/lib/download"
         const val SUBMIT = "user/score/submit"
-    }
-
-    enum class NetState {
-        DISCONNECTION,
-        WIFI,
-        DATA_GPRS,
-        DATA_3G,
-        DATA_4G
     }
 }

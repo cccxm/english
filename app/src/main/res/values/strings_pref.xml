@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--key-->
+    <string name="pref_key_user_settings">pref_key_user_settings</string>
+    <string name="pref_key_user_info">pref_key_user_info</string>
+    <string name="pref_key_user_vip">pref_key_user_vip</string>
+    <string name="pref_key_user_logout">pref_key_user_logout</string>
+
+    <string name="pref_key_net_settings">pref_key_net_settings</string>
+    <string name="pref_key_net_offline">pref_key_net_offline</string>
+    <string name="pref_key_net_flow">pref_key_net_flow</string>
+    <string name="pref_key_net_flow_info">pref_key_net_flow_info</string>
+    <string name="pref_key_net_flow_change">pref_key_net_flow_change</string>
+
+    <string name="pref_key_notify_settings">pref_key_notify_settings</string>
+    <string name="pref_key_notify_switch">pref_key_notify_switch</string>
+    <string name="pref_key_notify_ring">pref_key_notify_ring</string>
+
+    <!--title-->
+    <string name="pref_title_user_settings">用户</string>
+    <string name="pref_title_user_vip">开通会员</string>
+    <string name="pref_title_user_logout">退出登录</string>
+
+    <string name="pref_title_net_settings">网络</string>
+    <string name="pref_title_net_offline">离线模式</string>
+    <string name="pref_title_net_flow">网络选择</string>
+    <string name="pref_title_net_flow_change">省流量模式</string>
+
+    <string name="pref_title_notify_settings">通知</string>
+    <string name="pref_title_notify_switch">开启推送</string>
+    <string name="pref_title_notify_ring">通知消息铃声</string>
+
+    <!--summary-->
+    <string name="pref_summary_user_vip">开通会员可享受不限量的云备份服务</string>
+    <string name="pref_summary_user_logout">选择其他账号登录</string>
+
+    <string name="pref_summary_net_offline">开启后将不再进行网络请求</string>
+
+    <!--entries-->
+    <string-array name="pref_entries_net_flow">
+        <item>2G</item>
+        <item>3G</item>
+        <item>4G</item>
+    </string-array>
+
+    <!--entryValues-->
+    <string-array name="pref_entryValues_net_flow">
+        <item>2G</item>
+        <item>3G</item>
+        <item>4G</item>
+    </string-array>
+</resources>

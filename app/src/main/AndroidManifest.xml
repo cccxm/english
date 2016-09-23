@@ -34,6 +34,16 @@
         <activity
             android:name=".mvp.view.activity.ReciteActivity"
             android:theme="@style/Theme.Design.Light.NoActionBar" />
+
+        <receiver android:name=".component.reveiver.NetStateReceiver">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver>
+
+        <activity
+            android:name=".mvp.view.activity.SettingsActivity"
+            android:label="设置" />
     </application>
 
 </manifest>

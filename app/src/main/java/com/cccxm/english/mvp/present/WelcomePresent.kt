@@ -2,8 +2,10 @@ package com.cccxm.english.mvp.present
 
 import android.os.Handler
 import android.os.Message
+import android.util.Log
 import com.cccxm.english.bean.HttpResponse
 import com.cccxm.english.bean.WelcomeBean
+import com.cccxm.english.config.NetState
 import com.cccxm.english.config.UserHolder
 import com.cccxm.english.mvp.contract.WelcomeContract
 import com.cxm.utils.StringUtils
@@ -27,9 +29,13 @@ class WelcomePresent(val model: WelcomeContract.IWelcomeModel,
     }
 
     override fun start() {
-        model.loadData(this, { res ->
-            callback(res)
-        })
+        if (NetState.state.value > 0)
+            model.loadData(this, { res ->
+                callback(res)
+            })
+        else {
+            view.startMainActivity()
+        }
     }
 
 
@@ -61,15 +67,12 @@ class WelcomePresent(val model: WelcomeContract.IWelcomeModel,
                         bean.password = user.password
                         UserHolder.saveUser(view.context(), bean)
                         view.startMainActivity()
-                        view.finish()
                     } else {
                         view.startLoginActivity()
-                        view.finish()
                     }
                 })
             } else {
                 view.startLoginActivity()
-                view.finish()
             }
         }
     }
