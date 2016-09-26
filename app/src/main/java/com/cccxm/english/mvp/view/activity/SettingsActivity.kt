@@ -40,7 +40,7 @@ class SettingsActivity : BaseActivity<IPresenter>() {
         fun register() {
             val userVipPref = findPreference(R.string.pref_key_user_vip)
             userVipPref.setOnPreferenceChangeListener { pref, value ->
-                flushUserVip(value)
+                flushUserVip(pref,value)
                 true
             }
             val userLogoutPref = findPreference(R.string.pref_key_user_logout)
@@ -110,21 +110,21 @@ class SettingsActivity : BaseActivity<IPresenter>() {
         /**
          * 刷新用户会员状态
          */
-        private fun flushUserVip(value: Any? = null) {
-            val userVipEditPref = findPreference(R.string.pref_key_user_vip) as EditTextPreference
+        private fun flushUserVip(preference: Preference? = null, value: Any? = null) {
+            val pref = preference ?: findPreference(R.string.pref_key_user_vip)
             val user = UserHolder.getUser()
             if (user == null) {
-                userVipEditPref.summary = getString(R.string.pref_summary_user_vip)
+                pref.summary = getString(R.string.pref_summary_user_vip)
             } else {
                 if (value != null) {
                     if (value.toString().toInt() > 0) {
-                        userVipEditPref.summary = "您的会员时长为 $value 个月"
-                    } else userVipEditPref.summary = getString(R.string.pref_summary_user_vip)
+                        pref.summary = "您的会员时长为 $value 个月"
+                    } else pref.summary = getString(R.string.pref_summary_user_vip)
                 } else {
-                    val v = userVipEditPref.sharedPreferences.getString(userVipEditPref.key, "0").toInt()
+                    val v = get(R.string.pref_key_user_vip, "0").toInt()
                     if (v > 0) {
-                        userVipEditPref.summary = "您的会员时长为 $v 个月"
-                    } else userVipEditPref.summary = getString(R.string.pref_summary_user_vip)
+                        pref.summary = "您的会员时长为 $v 个月"
+                    } else pref.summary = getString(R.string.pref_summary_user_vip)
                 }
             }
         }
