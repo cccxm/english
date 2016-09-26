@@ -34,7 +34,7 @@ class SettingsActivity : BaseActivity<IPresenter>() {
 
         override fun onCreate(savedInstanceState: Bundle?) {
             super.onCreate(savedInstanceState)
-            addPreferencesFromResource(R.xml.pref_header)
+            addPreferencesFromResource(R.xml.pref_settings)
         }
 
         fun register() {
@@ -86,23 +86,24 @@ class SettingsActivity : BaseActivity<IPresenter>() {
          * 刷新用户信息
          */
         private fun flushUserInfo() {
-            val userInfoPref = findPreference(R.string.pref_key_user_info)
+            val pref = findPreference(R.string.pref_key_user_info)
             val user = UserHolder.getUser()
-            fun setInfo(name: String, score: Int) {
-                userInfoPref.title = name
-                userInfoPref.summary = "您目前的积分:$score"
-            }
             if (user == null) {
+                findPreference(R.string.pref_key_user_logout).isEnabled = false
                 if (NetState.state.value > 0) {
-                    setInfo("点击登录", 0)
-                    userInfoPref.intent = Intent(activity, LoginActivity::class.java)
+                    pref.title = "未登录"
+                    pref.summary = "点击登录"
+                    pref.intent = Intent(activity, LoginActivity::class.java)
                 } else {
-                    setInfo("查看网络连接", 0)
-                    userInfoPref.intent = Intent(Settings.ACTION_WIFI_SETTINGS)
+                    pref.title = "网络连接失败"
+                    pref.summary = "点击打开网络连接"
+                    pref.intent = Intent(Settings.ACTION_WIFI_SETTINGS)
                 }
             } else {
-                setInfo("您好 陈小默", user.score)
-                userInfoPref.intent = null
+                findPreference(R.string.pref_key_user_logout).isEnabled = true
+                pref.title = "您好 陈小默"
+                pref.summary = "您当前的积分:${user.score}"
+                pref.intent = null
             }
         }
 
@@ -156,7 +157,7 @@ class SettingsActivity : BaseActivity<IPresenter>() {
                 if (NetState.state == NetworkType.WIFI) {
                     pref.summary = "WiFi信号强度${NetUtils(activity).WIFI_RSSI}dBm"
                 }
-            }else pref.title = "网络未连接"
+            } else pref.title = "网络未连接"
         }
 
         /**
@@ -175,7 +176,7 @@ class SettingsActivity : BaseActivity<IPresenter>() {
         private fun flushNotifyRingtone(preference: Preference? = null, content: String? = null, allowNotify: Boolean? = null) {
             val pref = preference ?: findPreference(R.string.pref_key_notify_ring)
             pref.isEnabled = (allowNotify ?: getBoolean(R.string.pref_key_notify_switch))
-            val uri = Uri.parse(content ?: getString(R.string.pref_key_notify_ring))
+            val uri = Uri.parse(content ?: get(R.string.pref_key_notify_ring))
             val ring = RingtoneManager.getRingtone(activity, uri)
             val name = ring.getTitle(activity)
             pref.summary = if (StringUtils.isBlank(name)) "无" else name
@@ -197,6 +198,11 @@ class SettingsActivity : BaseActivity<IPresenter>() {
             return preferenceManager.sharedPreferences.getStringSet(key, defaultValue)
         }
 
+        private fun get(keyId: Int, defaultValue: String? = null): String {
+            val key = getString(keyId)
+            return preferenceManager.sharedPreferences.getString(key, defaultValue)
+        }
+
         var netTag = ""
 
         override fun onStart() {
@@ -207,9 +213,9 @@ class SettingsActivity : BaseActivity<IPresenter>() {
             }
         }
 
-        override fun onDestroy() {
+        override fun onStop() {
             NetState.unSubscribe(netTag)
-            super.onDestroy()
+            super.onStop()
         }
     }
 }
