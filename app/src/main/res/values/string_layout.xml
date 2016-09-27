@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="alg_notice_first">请在下方空白处绘制手势</string>
+    <string name="alg_notice_reFirst">两次输入不相同,请在下方空白处重新绘制手势</string>
+    <string name="alg_notice_second">请在下方空白处重复刚才的手势</string>
+</resources>

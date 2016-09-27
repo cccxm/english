@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_safe"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.cccxm.english.mvp.view.activity.SafeActivity">
+
+    <android.gesture.GestureOverlayView
+        android:id="@+id/as_gov_log"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gestureColor="#666"
+        android:gestureStrokeType="single"
+        android:gestureStrokeWidth="3">
+
+        <TextView
+            android:id="@+id/as_notice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/alg_notice_first" />
+    </android.gesture.GestureOverlayView>
+</RelativeLayout>

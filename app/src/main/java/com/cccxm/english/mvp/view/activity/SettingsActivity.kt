@@ -4,10 +4,10 @@ import android.content.Intent
 import android.media.RingtoneManager
 import android.net.Uri
 import android.os.Bundle
-import android.preference.EditTextPreference
 import android.preference.Preference
 import android.preference.PreferenceFragment
 import android.provider.Settings
+import android.util.Log
 import com.cccxm.english.R
 import com.cccxm.english.config.NetState
 import com.cccxm.english.config.UserHolder
@@ -40,13 +40,23 @@ class SettingsActivity : BaseActivity<IPresenter>() {
         fun register() {
             val userVipPref = findPreference(R.string.pref_key_user_vip)
             userVipPref.setOnPreferenceChangeListener { pref, value ->
-                flushUserVip(pref,value)
+                flushUserVip(pref, value)
                 true
             }
             val userLogoutPref = findPreference(R.string.pref_key_user_logout)
             userLogoutPref.setOnPreferenceClickListener {
                 UserHolder.deleteUser(activity)
                 ActivityUtils.finishActivities { startActivity(Intent(activity, LoginActivity::class.java)) }
+                true
+            }
+            val safeUpdatePref = findPreference(R.string.pref_key_safe_switch)
+            safeUpdatePref.setOnPreferenceChangeListener { pref, value ->
+                flushSafeUpdate(value as Boolean)
+                true
+            }
+            val safeLevelPref = findPreference(R.string.pref_key_safe_level)
+            safeLevelPref.setOnPreferenceChangeListener { pref, value ->
+                flushSafeLevel(pref, "$value")
                 true
             }
             val netOfflinePref = findPreference(R.string.pref_key_net_offline)
@@ -76,6 +86,8 @@ class SettingsActivity : BaseActivity<IPresenter>() {
         fun flush() {
             flushUserInfo()
             flushUserVip()
+            flushSafeUpdate()
+            flushSafeLevel()
             flushFlowSet()
             flushNetState()
             flushNotifySwitch()
@@ -121,11 +133,34 @@ class SettingsActivity : BaseActivity<IPresenter>() {
                         pref.summary = "您的会员时长为 $value 个月"
                     } else pref.summary = getString(R.string.pref_summary_user_vip)
                 } else {
-                    val v = get(R.string.pref_key_user_vip, "0").toInt()
+                    val v = get(R.string.pref_key_user_vip, "0")?.toInt() ?: 0
                     if (v > 0) {
                         pref.summary = "您的会员时长为 $v 个月"
                     } else pref.summary = getString(R.string.pref_summary_user_vip)
                 }
+            }
+        }
+
+        /**
+         * 刷新修改手势状态
+         */
+        private fun flushSafeUpdate(value: Boolean? = null) {
+            val pref = findPreference(R.string.pref_key_safe_update)
+            pref.isEnabled = value ?: getBoolean(R.string.pref_key_safe_switch)
+        }
+
+        /**
+         * 刷新安全级别
+         */
+        private fun flushSafeLevel(preference: Preference? = null, any: String? = null) {
+            val pref = preference ?: findPreference(R.string.pref_key_safe_level)
+            val value = any ?: get(R.string.pref_key_safe_level)
+            val entryValues = resources.getStringArray(R.array.pref_entryValues_safe_level)
+            val entries = resources.getStringArray(R.array.pref_entries_safe_level)
+            val index = entryValues.indexOf(value)
+            if (index >= 0) {
+                val level = entries[index]
+                pref.summary = "当前安全级别:$level"
             }
         }
 
@@ -198,7 +233,7 @@ class SettingsActivity : BaseActivity<IPresenter>() {
             return preferenceManager.sharedPreferences.getStringSet(key, defaultValue)
         }
 
-        private fun get(keyId: Int, defaultValue: String? = null): String {
+        private fun get(keyId: Int, defaultValue: String? = null): String? {
             val key = getString(keyId)
             return preferenceManager.sharedPreferences.getString(key, defaultValue)
         }

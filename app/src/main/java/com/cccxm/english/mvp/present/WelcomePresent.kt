@@ -2,7 +2,9 @@ package com.cccxm.english.mvp.present
 
 import android.os.Handler
 import android.os.Message
+import android.preference.PreferenceManager
 import android.util.Log
+import com.cccxm.english.R
 import com.cccxm.english.bean.HttpResponse
 import com.cccxm.english.bean.WelcomeBean
 import com.cccxm.english.config.NetState

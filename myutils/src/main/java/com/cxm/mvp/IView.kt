@@ -8,4 +8,5 @@ import android.content.Context
  */
 interface IView {
     fun context(): Context
+
 }

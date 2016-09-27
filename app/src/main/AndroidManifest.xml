@@ -15,13 +15,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".mvp.view.activity.WelcomeActivity"
-            android:theme="@style/Theme.Design.Light.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:theme="@style/Theme.Design.Light.NoActionBar" />
         <activity android:name=".mvp.view.activity.LoginActivity" />
         <activity
             android:name=".mvp.view.activity.MainActivity"
@@ -43,7 +37,26 @@
 
         <activity
             android:name=".mvp.view.activity.SettingsActivity"
-            android:label="设置" />
+            android:label="设置">
+            <intent-filter>
+                <action android:name="android.intent.action.MANAGE_NETWORK_USAGE" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".mvp.view.activity.LogGestureActivity">
+            <intent-filter>
+                <action android:name="pref.intent.action.UpdateGestureActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".mvp.view.activity.SafeActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
